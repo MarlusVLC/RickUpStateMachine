@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3175ae757481c20419a18efcdc5668cf, type: 3}
   m_Name: PlayerStats
   m_EditorClassIdentifier: 
-  JumpForce: 100
+  JumpForce: 50
   JumpAddTime: 0.26
   RockCheckLength: 1
   RespawnTime: 2

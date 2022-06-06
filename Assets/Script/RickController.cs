@@ -15,7 +15,6 @@ public class RickController : MonoBehaviour
 	
 	private Rigidbody2D _rb;
 
-	// private bool _isJumping, _isDead;
 	public float _jumpStartTime;
 	private Collider2D LastCheckedRock;
 	public bool _rockWasJumped;
@@ -41,6 +40,10 @@ public class RickController : MonoBehaviour
 		get => _rockWasJumped;
 		set => _rockWasJumped = value;
 	}
+
+	// public bool IsJumping { get; set; }
+	//
+	// public bool IsDead { get; set; }
 
 	public enum RickStates { walking, jumping, dead }
 
@@ -95,22 +98,22 @@ public class RickController : MonoBehaviour
 		LastCheckedRock = colliderHit;
 	}
 
-	public void OnCollisionEnter2D(Collision2D collision)
-	{
-		if (collision.gameObject.layer == _groundRickLayer)
-		{
-			// _isJumping = false;
-			if (_groundCheck)
-				_groundCheck = false;
-			if (_rockWasJumped)
-			{
-				Game.Data.AddScore();
-				_rockWasJumped = false;
-			}
-			return;
-		}
-		Death();
-	}
+	// public void OnCollisionEnter2D(Collision2D collision)
+	// {
+	// 	if (collision.gameObject.layer == _groundRickLayer)
+	// 	{
+	// 		IsJumping = false;
+	// 		if (_groundCheck)
+	// 			_groundCheck = false;
+	// 		if (_rockWasJumped)
+	// 		{
+	// 			Game.Data.AddScore();
+	// 			_rockWasJumped = false;
+	// 		}
+	// 		return;
+	// 	}
+	// 	Death();
+	// }
 
 	public bool IsGroundLayer(LayerMask otherLayer) => otherLayer == _groundRickLayer;
 
@@ -128,7 +131,7 @@ public class RickController : MonoBehaviour
 	public void Death()
 	{
 		_anim.SetTrigger("isdead");
-		// _isDead = true;
+		// IsDead = true;
 		PlaySoundFX(Stats.SoundFX.Death);
 		Game.Data.Death();
 		// if (Game.Data.Lives > 0)
@@ -145,12 +148,12 @@ public class RickController : MonoBehaviour
 	public IEnumerator Respawn()
 	{
 		// IsRespawning = true;
+		_anim.SetTrigger("revive");
 		yield return new WaitForSeconds(Game.Data.RespawnTime);
 		transform.position = _startPos;
 		transform.rotation = Quaternion.identity;
 		_rb.velocity = Vector2.zero;
 		_rb.angularVelocity = 0f;
-		_anim.SetTrigger("revive");
-		// _isDead = false;		
+		// IsDead = false;		
 	}	
 }
