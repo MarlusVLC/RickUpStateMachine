@@ -30,6 +30,7 @@ public class Game : MonoBehaviour
 	{
 		Score++;
 		ScoreUIText.text = Score + "";
+		
 	}
 
 	public void Death()

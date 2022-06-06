@@ -1,0 +1,3 @@
+[submodule "Assets/3rdParty/EzMSG"]
+	path = Assets/3rdParty/EzMSG
+	url = git@github.com:MarlusVLC/EzMsg.git
